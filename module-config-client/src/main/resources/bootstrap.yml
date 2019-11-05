@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: master
+      profile: dev
+      discovery:
+        enabled: true # 可以发现 配置服务 功能开启
+        service-id: config-server # 指定配置服务的name
+
+server:
+  port: 8882
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

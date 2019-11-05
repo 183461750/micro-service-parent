@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-hi
+
+server:
+  port: 8762
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ #服务注册到该地址的服务注册中心
+
+management: #该设置允许该服务可以被http访问，如查看服务 actuator 等信息
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"

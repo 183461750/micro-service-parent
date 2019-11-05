@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: eureka-server #该注册中心的名称，该名称唯一，可以被其他服务识别
+
+server:
+  port: 8761 #服务启动后监听端口
+
+eureka:
+  instance:
+    hostname: localhost #服务实例访问ip
+  client:
+    register-with-eureka: false #本身为服务注册中心，不需要注册
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #需要注册到该中心的服务需要访问的地址url

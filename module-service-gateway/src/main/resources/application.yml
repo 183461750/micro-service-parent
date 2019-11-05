@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes: # 将请求路径 /demo/** 路由至 service-hi 服务，filter 将请求 /path 前缀去掉
+        - id: service-hi
+          uri: lb://SERVICE-HI # 重点！/info必须使用http进行转发，lb代表从注册中心获取服务
+          predicates:
+            - Path=/demo/** # 重点！转发该路径！,/userapi/**,
+          filters:
+            # http://localhost:6601/userapi/user/users/2, 必须加上StripPrefix=1，否则访问服务时会带上userapi
+            #而不是我们期望的去掉userapi，只保留**部分
+            - StripPrefix=1
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

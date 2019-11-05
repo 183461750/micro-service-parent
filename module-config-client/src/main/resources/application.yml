@@ -1,0 +1,17 @@
+##rabbitmq 连接 相关配置，作为消息总线
+spring:
+  rabbitmq:
+    addresses: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh # 该服务可以接受外部 bus-refresh web 请求，来更新客户端读取的配置信息
